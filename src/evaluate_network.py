@@ -5,6 +5,8 @@ import onnxruntime
 import cv2
 import numpy as np
 
+
+
 onnxpath = '../net/onnx/patch-1.onnx'
 imgpath = '../dataset/patch-1/images/'
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')

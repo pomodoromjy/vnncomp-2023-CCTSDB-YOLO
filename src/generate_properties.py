@@ -90,16 +90,12 @@ def write_vnn_spec(img_pre, list, dir_path, prefix="spec", positions=2, len_targ
 
 
 def main():
-    # seed = int(sys.argv[1])
-    seed = 1
+    seed = int(sys.argv[1])
+    # seed = 1
     mean = 0.0
     std = 1.0
-    # epsilon = [0.004,0.012]
     csv = "../Yolo-FastestV2-patch-instances.csv"
 
-    '''get the list of success images'''
-    # sucess_images_mask = {'patch-1':'../dataset/patch-1/images',
-    #                       'patch-2':'../dataset/patch-3/images'}
     img_file_pre = {'patch-1': '../dataset/patch-1/images',
                     'patch-3': '../dataset/patch-3/images'}
     patch_1_list = get_random_images(img_file_pre['patch-1'],random=True,length=16,seed=seed)
@@ -107,7 +103,6 @@ def main():
     list = {'patch-1':patch_1_list,'patch-3':patch_3_list}
     network_path = '../net/onnx/'
     vnnlib_path = '../specs/vnnlib/'
-    # img_file_pre = r'../dataset/test_images/'
 
     mean = np.array(mean).reshape((1, -1, 1, 1)).astype(np.float32)
     std = np.array(std).reshape((1, -1, 1, 1)).astype(np.float32)
