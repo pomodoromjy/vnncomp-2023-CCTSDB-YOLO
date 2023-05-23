@@ -22,7 +22,7 @@ def get_random_images(path,random,length,seed):
                 random_sel_list.append(list[index])
     return random_sel_list
 
-def write_vnn_spec(img_pre, list, dir_path, prefix="spec", positions=2, len_target=6, n_class=1,
+def write_vnn_spec(img_pre, list, dir_path, prefix="spec", n_class=1,
                    mean=0.0, std=1.0, csv='',network_path='',vnnlib_path=''):
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
@@ -90,23 +90,23 @@ def write_vnn_spec(img_pre, list, dir_path, prefix="spec", positions=2, len_targ
 
 
 def main():
-    seed = int(sys.argv[1])
-    # seed = 1
+    # seed = int(sys.argv[1])
+    seed = 1
     mean = 0.0
     std = 1.0
-    csv = "../Yolo-FastestV2-patch-instances.csv"
+    csv = "./instances.csv"
 
-    img_file_pre = {'patch-1': '../dataset/patch-1/images',
-                    'patch-3': '../dataset/patch-3/images'}
+    img_file_pre = {'patch-1': './dataset/patch-1/images',
+                    'patch-3': './dataset/patch-3/images'}
     patch_1_list = get_random_images(img_file_pre['patch-1'],random=True,length=16,seed=seed)
     patch_3_list = get_random_images(img_file_pre['patch-3'],random=True,length=16,seed=seed)
     list = {'patch-1':patch_1_list,'patch-3':patch_3_list}
-    network_path = '../net/onnx/'
-    vnnlib_path = '../specs/vnnlib/'
+    network_path = './onnx/'
+    vnnlib_path = './vnnlib/'
 
     mean = np.array(mean).reshape((1, -1, 1, 1)).astype(np.float32)
     std = np.array(std).reshape((1, -1, 1, 1)).astype(np.float32)
-    write_vnn_spec(img_file_pre, list, dir_path='../specs/vnnlib', prefix='spec',positions=2, n_class=1, mean=mean, std=std,csv=csv,
+    write_vnn_spec(img_file_pre, list, dir_path='./vnnlib', prefix='spec', n_class=1, mean=mean, std=std,csv=csv,
                        network_path=network_path, vnnlib_path=vnnlib_path)
 
 
