@@ -1,12 +1,8 @@
-import argparse
 import numpy as np
 import os
-import re
 import PIL.Image as Image
 import sys
-import torch
 import numpy.random as random
-import cv2
 
 def get_random_images(path,random,length,seed):
     list = []
@@ -34,7 +30,8 @@ def write_vnn_spec(img_pre, list, dir_path, prefix="spec", n_class=1,
             pred_file = os.path.join(img_pre[network].replace('images', 'pred_labels'), imagename.replace('jpg', 'txt'))
             spec_name = f"{prefix}_onnx_{network}_idx_{imagename.split('.')[0]}.vnnlib"
             spec_path = os.path.join(dir_path, spec_name)
-            x = cv2.imread(os.path.join(img_pre[network], imagename))
+            x = Image.open(os.path.join(img_pre[network], imagename))
+            x = np.array(x)[:,:,(2,1,0)]
             x = x.transpose(2, 0, 1)
             x = np.array(x) / 255
             x = ((x - mean) / std).reshape(-1)
@@ -90,8 +87,8 @@ def write_vnn_spec(img_pre, list, dir_path, prefix="spec", n_class=1,
 
 
 def main():
-    # seed = int(sys.argv[1])
-    seed = 1
+    seed = int(sys.argv[1])
+    # seed = 1
     mean = 0.0
     std = 1.0
     csv = "./instances.csv"
