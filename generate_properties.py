@@ -73,7 +73,7 @@ def write_vnn_spec(img_pre, list, dir_path, prefix="spec", n_class=1,
     if not os.path.exists(csv):
         os.system(r"touch {}".format(csv))
     csvFile = open(csv, "w")
-    timeout = 60
+    timeout = 350
     for vnnLibFile in os.listdir(vnnlib_path):
         net1 = "patch-1"
         net2 = "patch-3"
