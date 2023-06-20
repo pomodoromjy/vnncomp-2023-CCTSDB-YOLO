@@ -68,7 +68,7 @@ def write_vnn_spec(img_pre, list, dir_path, prefix="spec", n_class=1,
 
                 f.write(f"\n; Definition of output constraints\n")
                 for i in range(n_class):
-                    f.write(f"(assert (< Y_{i} 0.5))\n")
+                    f.write(f"(assert (<= Y_{i} 0.5))\n")
     #make csv file
     if not os.path.exists(csv):
         os.system(r"touch {}".format(csv))

@@ -36896,4 +36896,4 @@
 (assert (<= X_12295 0.92132650))
 
 ; Definition of output constraints
-(assert (< Y_0 0.5))
+(assert (<= Y_0 0.5))
